@@ -6,9 +6,12 @@ function App() {
   const [questions, setQuestions] = useState(quiz);
   const [currentQuestionId, setCurrentQuestion] = useState(1);
   const [score, setScore] = useState(0);
+
   const currentQuestion = questions.find((q) => q.id === currentQuestionId);
 
   function handleQuestionAnswered(correct) {
+    // console.log("Handling question answered:", correct); /* debugging*/
+
     if (currentQuestionId < questions.length) {
       setCurrentQuestion((currentQuestionId) => currentQuestionId + 1);
     } else {
@@ -22,7 +25,9 @@ function App() {
   return (
     <main>
       <section>
-        {currentQuestion ? (
+        {/* If currentQuestion is truthy (exists), it renders the <Question> component.
+           If currentQuestion is falsy (null, undefined, etc.), it renders a fragment (<> ... </>), displaying "Game Over" and the total correct score. */}
+        {currentQuestion ? ( 
           <Question
             question={currentQuestion}
             onAnswered={handleQuestionAnswered}
